@@ -1,0 +1,204 @@
+html(lang='en')
+  head
+    title State of the Art
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    // Bootstrap CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+  body
+    script(src='http://cdn.peerjs.com/0.3/peer.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/async/2.5.0/async.js')
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
+    // Compiled and minified CSS
+    link(rel='stylesheet', type='text/css', href='../css/mystyle.css')
+    .main-container
+      // Container with User Profile
+      .container
+        #row-profile.row
+          // Content here
+          #col-image.col-md-2
+            if user.account.google.active
+              img#profile_image.card-img-top.rounded-circle(src= '' + user.account.google.photo, alt='Card image cap')
+            else if user.account.facebook.active
+              img#profile_image.card-img-top.rounded-circle(src= '' + user.account.facebook.photo, alt='Card image cap')
+            else if user.account.local.active
+              img#profile_image.card-img-top.rounded-circle(src= 'http://www.gabarro.com/gabarro/media/img/gabarro23881.jpg', alt='Card image cap')
+          .col-md-4
+            if user.account.google.active
+              h3#name.name= user.account.google.name
+              p#email.email= 'Email: ' + user.account.google.email
+              p#peer= 'PeerJS ID: ' + user.account.id
+            else if user.account.facebook.active
+              h3#name.name= user.account.facebook.name
+              p#email.email= 'Email: ' + user.account.facebook.email
+              p#peer= 'PeerJS ID: ' + user.account.id
+            else if user.account.local.active
+              h3#name.name= user.account.local.name
+              p#email.email= 'Email: ' + user.account.local.email
+              p#peer= 'PeerJS ID: ' + user.account.id
+          .col-md
+            button#create-chat.btn.btn-outline-success(type='button', data-toggle='modal', data-target='#myModal')  Create Chat 
+            button#join-chat.btn.btn-outline-success(type='button', data-toggle='modal', data-target='#myModal2')  Join Chat 
+            button#invite-chat.btn.btn-outline-success(type='button', style='display: none;', data-toggle='modal', data-target='#myModal4')  Invite Friend 
+            button#close-chat.btn.btn-outline-success(type='button', style='display: none;')  Close Chat 
+            button#leave-chat.btn.btn-outline-success(type='button', style='display: none;')  Leave Chat 
+            button#call-button.btn.btn-outline-success(type='button', data-toggle='modal', data-target='#myModal6')  Video Call 
+            button#leave-call.btn.btn-outline-success(type='button', style='display: none;')  Hagout 
+            button#logout.btn.btn-outline-success(type='button')  Logout 
+      script(src='../js/Client.js')
+      
+    // Container with User Profile
+    .container
+      #chat-room-title.row
+      #chat-room-row.row
+        // Content here
+      #messages-input-row.enter-message-row
+        // Content here
+      
+      // Create Chat Room Modal
+      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Create Chat Room
+            .modal-body
+              form
+                .chat-name
+                  label.form-control-label(for='chat-name') Chat Name:
+                  input#chat-name.form-control(type='text')
+                .friends-group
+                  label#add-friend-label.form-control-label(for='message-text', style='display: none;') Insert friends email: (Separated by comma)
+                  textarea#emails.form-control(style='display: none;')
+            .modal-footer
+              button#create-chat-form.btn.btn-outline-success(type='button', data-dismiss='modal') Create
+              button#add-friend-form.btn.btn-primary(type='button') Add Friends
+              button#create-chat-form-close.btn.btn-default(type='button', onclick='{clearForms()}', data-dismiss='modal') Close
+              
+      // Join Chat Room Modal
+      #myModal2.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Join Chat Room
+            .modal-body
+              form
+                .chat-name
+                  label.form-control-label(for='chat-name') Chat URL:
+                  input#chat-name-join.form-control(type='text')
+            .modal-footer
+              button#join-chat-form.btn.btn-outline-success(type='button', data-dismiss='modal') Join
+              button#create-chat-form-close.btn.btn-default(type='button', onclick='{clearForms()}', data-dismiss='modal') Close 
+              
+      // Receive Invitation Chat Room Modal
+      #myModal3.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Invitation
+            .modal-body
+              form
+                .invitation-chat-name
+                  // content
+                .invitation-chat-url
+                  // content
+                .invitation-chat-participants
+                  // content
+            .modal-footer
+              button#accept-chat-invitation.btn.btn-outline-success(type='button', data-dismiss='modal') Accept
+              button#reject-chat-invitation.btn.btn.btn-danger(type='button', onclick='{clearForms()}', data-dismiss='modal') Reject
+    
+      // Close Chat Chat Room Modal
+      #myModal5.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Chat Closed
+            .modal-body
+              form
+                .close-chat-name
+                  // content
+                .close-chat-identity
+                  // content
+            .modal-footer
+              button#invitation-chat-invitation-close.btn.btn-default(type='button', onclick='{clearForms()}', data-dismiss='modal') Close
+              
+      // Invitation Chat Room Modal
+      #myModal4.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Invite Friend
+            .modal-body
+              form
+                .friends-group
+                  label#invite-add-friend.form-control-label(for='message-text') Insert friends email: (Separated by comma)
+                  textarea#emails-invitation.form-control
+            .modal-footer
+              button#invite-form.btn.btn-outline-success(type='button', data-dismiss='modal') Invite
+              button#invite-chat-form-close.btn.btn-default(type='button', onclick='{clearForms()}', data-dismiss='modal') Close
+              
+      // Create Call Modal
+      #myModal6.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Call Friend
+            .modal-body
+              form
+                .friends-group
+                  label#invite-call-friend.form-control-label(for='message-text') Insert friends email: (Separated by comma)
+                  textarea#emails-invitation-call.form-control
+            .modal-footer
+              button#call-form.btn.btn-outline-success(type='button', data-dismiss='modal') Call
+              button#invite-chat-form-close.btn.btn-default(type='button', data-dismiss='modal', onclick='clearForms()') Close
+
+      // Receive Invitation Video Call Modal
+      #myModal7.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Video Call Invitation
+            .modal-body
+              form
+                .invitation-call-name
+                  // content
+            .modal-footer
+              button#accept-call-invitation.btn.btn-outline-success(type='button', data-dismiss='modal') Accept
+              button#reject-call-invitation.btn.btn.btn-danger(type='button', data-dismiss='modal') Reject
+
+      // Close Chat Chat Room Modal
+      #myModal8.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Video Call Closed
+            .modal-body
+              form
+                .close-call-identity
+                  // content
+            .modal-footer
+              button#invitation-call-close.btn.btn-default(type='button', data-dismiss='modal', onclick='clearForms()') Close
+
+      script.
+        const clearForms = function () {
+          document.getElementById('chat-name').value = "";
+          document.getElementById('chat-name-join').value = "";
+          document.getElementById('emails').value = "";
+          document.getElementById('emails-invitation').value = "";
+          document.getElementById('emails-invitation-call').value = "";
+          $('#add-friend-label').hide();
+          $('#emails').hide();
+          $('#add-friend-form').show();
+          $('.invitation-chat-name').empty();
+          $('.invitation-call-name').empty();
+          $('.invitation-chat-participants').empty();
+          $('.close-chat-name').empty();
+          $('.close-chat-identity').empty();
+          $('.close-call-identity').empty();
+          $('#my-video-content').remove();
+          $('#video-content').remove();
+        }

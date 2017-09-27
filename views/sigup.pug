@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+  head
+    title State of the Art
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    // Bootstrap CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+  body
+    script(src='/socket.io/socket.io.js')
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
+    // Compiled and minified CSS
+    link(rel='stylesheet', type='text/css', href='./css/mystyle.css')
+    #start_container.start_container
+      // LOGIN FORM
+      form#login-form(action='/signup', method='post')
+        h3(style='  text-align: center;')
+          | Create Account 
+        .form-group
+          label Name
+          input.form-control(type='text', name='name')
+        .form-group
+          label Email
+          input.form-control(type='text', name='email')
+        .form-group
+          label Password
+          input.form-control(type='password', name='password')
+        .login-div-button
+          // <a class="btn btn-outline-success" id="login-button" role="button">Login</a>
+          button#login-button.btn.btn-outline-success(type='submit') Create Account
+          hr
+          p
+            | Go back? 
+            a(href='/') Yes
+    // show any messages that come back with authentication
+    if message
+      if message.length > 0 
+            div#alert.alert.alert-danger #{message}
