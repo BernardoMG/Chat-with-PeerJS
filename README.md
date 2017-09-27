@@ -4,25 +4,25 @@ Simple Chat WebApp that allows the creation of chat rooms to exchange messages a
 
 #### Technologies used:
 
-`[Express framework](https://expressjs.com)` - web server;
+[Express framework](https://expressjs.com) - web server;
 
-`[Express Session](https://github.com/expressjs/session)` - storage the session data;
+[Express Session](https://github.com/expressjs/session) - storage the session data;
 
-`[Pug](https://pugjs.org)` - template engine;
+[Pug](https://pugjs.org) - template engine;
 
-`[Connect-Flash](https://github.com/jaredhanson/connect-flash)` - used for storing session messages, e.g. error messages;
+[Connect-Flash](https://github.com/jaredhanson/connect-flash) - used for storing session messages, e.g. error messages;
 
-`[Cookie-Parser](https://www.npmjs.com/package/cookie-parser)` - middleware that enables signed cookies;
+[Cookie-Parser](https://www.npmjs.com/package/cookie-parser) - middleware that enables signed cookies;
 
-`[Socket.io](https://socket.io)` - communication server-clients;
+[Socket.io](https://socket.io) - communication server-clients;
 
-`[Mongoose](http://mongoosejs.com)` -  ORM to interact with MongoDB;
+[Mongoose](http://mongoosejs.com) -  ORM to interact with MongoDB;
 
-`[Passport.js](http://passportjs.org)` - authentication middleware for Node.js (local authentication, Google and Facebook);
+[Passport.js](http://passportjs.org) - authentication middleware for Node.js (local authentication, Google and Facebook);
 
-`[PeerJS](http://peerjs.com)` - framework to deal with WebRTC standard (PeerJS server and client);
+[PeerJS](http://peerjs.com) - framework to deal with WebRTC standard (PeerJS server and client);
 
-`[Bootstrap](http://getbootstrap.com)` - deal with UI.
+[Bootstrap](http://getbootstrap.com) - deal with UI.
  
  
  #### How to run
