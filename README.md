@@ -26,3 +26,13 @@ Simple Chat WebApp that allows the creation of chat rooms to exchange messages a
  
  
  #### How to run
+
+1.
+```shell
+npm install
+```
+
+2.
+```shell
+node server.js
+```
