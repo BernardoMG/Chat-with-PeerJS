@@ -32,7 +32,10 @@ Simple Chat WebApp that allows the creation of chat rooms to exchange messages a
 npm install
 ```
 
-2.
+2. Edit the `config/credentials.js` file with your ID's and Key's.
+
+
+3.
 ```shell
 node server.js
 ```
